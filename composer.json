@@ -1,11 +1,15 @@
 {
-    "name": "gilbitron/easycsrf",
+    "name": "smartwebdk/easycsrf",
     "description": "A simple, standalone CSRF protection library",
     "license": "MIT",
     "authors": [
         {
             "name": "Gilbert Pellegrom",
             "email": "gilbert@pellegrom.me"
+        },
+        {
+            "name": "Dan Jessen",
+            "email": "dj@smartweb.dk"
         }
     ],
     "type": "library",

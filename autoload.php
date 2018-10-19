@@ -1,7 +1,5 @@
 <?php
 
-date_default_timezone_set('Europe/London');
-
 spl_autoload_register(function($class) {
 	$base = '/src/';
 	$class = str_replace('EasyCSRF\\', '', $class);

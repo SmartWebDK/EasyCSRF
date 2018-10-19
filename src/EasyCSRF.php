@@ -22,7 +22,7 @@ class EasyCSRF {
 	{
 		$key = $result = preg_replace('/[^a-zA-Z0-9]+/', '', $key);
 
-		$extra = sha1($_SERVER['REMOTE_ADDR'] . $_SERVER['HTTP_USER_AGENT']);
+		$extra = sha1($this->clientInfo());
 		// time() is used for token expiration
 		$token = base64_encode(time() . $extra . $this->randomString(32));
 		$this->session->set($this->session_prefix . $key, $token);
@@ -55,7 +55,7 @@ class EasyCSRF {
 			$this->session->set($this->session_prefix . $key, null);
 		}
 
-		if (sha1($_SERVER['REMOTE_ADDR'] . $_SERVER['HTTP_USER_AGENT']) != substr(base64_decode($session_token), 10, 40)) {
+		if (sha1($this->clientInfo()) != substr(base64_decode($session_token), 10, 40)) {
 			throw new \Exception('Form origin does not match token origin.');
 		}
 
@@ -85,6 +85,15 @@ class EasyCSRF {
 		}
 
 		return $string;
+	}
+
+	/**
+	 * Return client ip and agent keeping load balancing in mind
+     *
+	 * @return string
+	 */
+	protected function clientInfo() {
+		return (isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR']) . $_SERVER['HTTP_USER_AGENT'];
 	}
 
 }
