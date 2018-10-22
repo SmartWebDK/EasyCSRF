@@ -6,6 +6,10 @@
         {
             "name": "Gilbert Pellegrom",
             "email": "gilbert@pellegrom.me"
+        },
+        {
+            "name": "Dan Jessen",
+            "email": "dj@smartweb.dk"
         }
     ],
     "type": "library",
