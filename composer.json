@@ -1,5 +1,5 @@
 {
-    "name": "smartwebdk/easycsrf",
+    "name": "gilbitron/easycsrf",
     "description": "A simple, standalone CSRF protection library",
     "license": "MIT",
     "authors": [
