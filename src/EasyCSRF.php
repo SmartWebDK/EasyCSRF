@@ -55,7 +55,7 @@ class EasyCSRF {
 			$this->session->set($this->session_prefix . $key, null);
 		}
 
-		if (sha1($this->clientInfo()) != substr(base64_decode($session_token), 10, 40)) {
+		if (sha1($this->clientInfo()) != substr(base64_decode($session_token), 10, 40) && sha1($this->legacyClientInfo()) != substr(base64_decode($session_token), 10, 40)) {
 			throw new \Exception('Form origin does not match token origin.');
 		}
 
@@ -95,5 +95,15 @@ class EasyCSRF {
 	protected function clientInfo() {
 		return (isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR']) . $_SERVER['HTTP_USER_AGENT'];
 	}
+
+	/**
+	 * Return client ip and agent
+     *
+	 * @return string
+	 */
+	protected function legacyClientInfo() {
+		return $_SERVER['REMOTE_ADDR'] . $_SERVER['HTTP_USER_AGENT'];
+	}
+
 
 }
